@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "E:/Xilinx ISE Projects/CLOCK/CLOCK_TEST_isim_beh.exe" -prj "E:/Xilinx ISE Projects/CLOCK/CLOCK_TEST_beh.prj" "work.CLOCK_TEST" 
