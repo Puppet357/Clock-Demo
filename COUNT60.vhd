@@ -36,47 +36,14 @@ end COUNT60;
 
 architecture Behavioral of COUNT60 is
 
-signal cnt_Ten,cnt_One:integer range 0 to 9 :=0;--ÊýÂë¹Ü¼ÆÊýµÄÊ®Î»ºÍ¸öÎ»
+signal cnt_Ten,cnt_One:integer range 0 to 9 :=0;--æ•°ç ç®¡è®¡æ•°çš„åä½å’Œä¸ªä½
 signal Q:STD_LOGIC_VECTOR(1 DOWNTO 0):="00";
 signal QQ:STD_LOGIC_VECTOR(1 DOWNTO 0):="00";
 signal QL,QH:STD_LOGIC_VECTOR(3 DOWNTO 0):="0000";
 
-SIGNAL ST: integer range 0 to 9 :=0;   --¶¨ÒåÃô¸ÐÐÅºÅ²¢¸³³õÖµs0
+SIGNAL ST: integer range 0 to 9 :=0;   --å®šä¹‰æ•æ„Ÿä¿¡å·å¹¶èµ‹åˆå€¼s0
 
 begin
-
---COM:PROCESS(Q)
---BEGIN
---	CASE Q IS
---	WHEN "00" =>   QQ<="00";
---	WHEN "01" =>   QQ<="01"; 
---	WHEN "10" =>   QQ<="10";
---	WHEN others=>QQ<="00"; --¶Ôº¯Êý½øÐÐÀ©³ä
---END CASE;
---END PROCESS COM;
---
---process(clk,rst,en) 
---	begin
---	if (rst'event and rst='1') then 
---	                              Q<="00" ; 
---	elsif (clk'event and clk ='1')  then
---            if Q="01" then		
---               if (en'event and en ='1')  then 
---						                          Q<="10"; 
---					end if;									  
---				elsif  Q="00" then	                   
---					     if (en'event and en ='1')  then 
---						                          Q<="01";
---						  end if;
---				elsif  Q="10" then	
---					     if (en'event and en ='1')  then 
---						                          Q<="01";
---						  end if;
---				else 	Q<="10";	  						  
---            end if;
---	end if;
---end process;
-
 
 CNT : process(clk_C,RST,EN) 
 	begin
@@ -103,73 +70,30 @@ end process CNT;
 COML: process(cnt_One,QL)
 	begin
 		case cnt_One is
-			when 0 => QL <="0000";--Êý×Ö0
-			when 1 => QL <="0001";--Êý×Ö1
-			when 2 => QL <="0010";--Êý×Ö2
-			when 3 => QL <="0011";--Êý×Ö3
-			when 4 => QL <="0100";--Êý×Ö4
-			when 5 => QL <="0101";--Êý×Ö5
-			when 6 => QL <="0110";--Êý×Ö6
-			when 7 => QL <="0111";--Êý×Ö7
-			when 8 => QL <="1000";--Êý×Ö8
-			when 9 => QL <="1001";--Êý×Ö9
+			when 0 => QL <="0000";--æ•°å­—0
+			when 1 => QL <="0001";--æ•°å­—1
+			when 2 => QL <="0010";--æ•°å­—2
+			when 3 => QL <="0011";--æ•°å­—3
+			when 4 => QL <="0100";--æ•°å­—4
+			when 5 => QL <="0101";--æ•°å­—5
+			when 6 => QL <="0110";--æ•°å­—6
+			when 7 => QL <="0111";--æ•°å­—7
+			when 8 => QL <="1000";--æ•°å­—8
+			when 9 => QL <="1001";--æ•°å­—9
 			when others => QL <="0000";
 		end case;
 DOUTL<=QL;
 end process COML;
- 
-
---COML:PROCESS(ST,QQ,QL,QH,clk,clk_c,rst,en) 
---BEGIN
---IF QQ="00" THEN 
---	             ST<=0; QL<="0000"; QH<="0000"; 
---ELSIF QQ="01" THEN 
---	CASE ST IS
---	WHEN 0 => QL <="0000";  
---	WHEN 1 => QL <="0001";  
---	WHEN 2 => QL <="0010";  
---	WHEN 3 => QL <="0011";  
---	WHEN 4 => QL <="0100";  
---	WHEN 5 => QL <="0101";  
---	WHEN 6 => QL <="0110";  
---	WHEN 7 => QL <="0111";  
---	WHEN 8 => QL <="1000";  
---	WHEN 9 => QL <="1001";  
---	WHEN others=>QL <="0000";  --¶Ôº¯Êý½øÐÐÀ©³ä
---END CASE;
---   if (clk_c'event and clk_c ='1')  then
---	   if (ST=9) then
---		               ST <=0;
---		else 
---	        ST<=ST+1;
---	   end if;
---	end if;
---END IF;
---if (clk'event and clk ='1')  then
---	                               DOUTL <=QL;
---end if;
---END PROCESS COML;
---
---COMH1:PROCESS(ST,cnt_Ten)
---BEGIN
---   IF (ST=0) THEN
---	   IF ( cnt_Ten=5 ) THEN
---		                      cnt_Ten<=0;
---		ELSE
---	        cnt_Ten<=cnt_Ten+1;
---	   END IF;
---	END IF;	
---END PROCESS COMH1;
 	
 COMH: process(cnt_Ten,QH)
 	begin
 		case cnt_Ten is
-			when 0 => QH <="0000";--Êý×Ö0
-			when 1 => QH <="0001";--Êý×Ö1
-			when 2 => QH <="0010";--Êý×Ö2
-			when 3 => QH <="0011";--Êý×Ö3
-			when 4 => QH <="0100";--Êý×Ö4
-			when 5 => QH <="0101";--Êý×Ö5
+			when 0 => QH <="0000";--æ•°å­—0
+			when 1 => QH <="0001";--æ•°å­—1
+			when 2 => QH <="0010";--æ•°å­—2
+			when 3 => QH <="0011";--æ•°å­—3
+			when 4 => QH <="0100";--æ•°å­—4
+			when 5 => QH <="0101";--æ•°å­—5
 			when others => QH <="0000";
 		end case;
 end process COMH;
